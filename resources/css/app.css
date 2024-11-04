@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --xxs: 7px;
+        --xs: 10px;
+        --sm: 15px;
+        --md: 20px;
+        --lg: 30px;
+        --xl: 40px;
+        --xxl: 50px;
+
+        --height-navbar: 50px;
+        --height-input: 40px;
+
+        --color-unread: #ff3b7e;
+
+        --color-shadow: 46, 23, 81;
+        --color-shadow-tinted: 106, 38, 179;
+
+        --color-shadow-sm: rgba(var(--color-shadow), 7%);
+        --color-shadow-md: rgba(var(--color-shadow), 12%);
+        --color-shadow-lg: rgba(var(--color-shadow), 15%);
+        --color-shadow-lg-tinted: rgba(var(--color-shadow-tinted), 12%);
+        --color-shadow-popup: rgba(var(--color-shadow), 7%);
+
+        --spacing-post: 8px;
+    }
+
+    html {
+        font-family: "Open Sans", sans-serif;
+        @apply font-semibold text-zinc-800;
+
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        @apply touch-manipulation;
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+        overflow: auto;
+    }
+
+    *:focus {
+        outline: none;
+    }
+}
+
+@layer components {
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
+
+    .fill {
+        font-variation-settings: "FILL" 1 !important;
+    }
+
+    .pressable {
+        @apply pointer-events-auto cursor-pointer;
+    }
+
+    .disabled {
+        @apply !w-0 !h-0 !m-0 !p-0 !invisible !fixed;
+    }
+
+    .loading-black {
+        opacity: 7.5%;
+        height: 30px;
+        @apply aspect-square;
+    }
+
+    .loading-white {
+        opacity: 75%;
+        height: 30px;
+        @apply aspect-square;
+    }
+}
+
+@layer utilities {
+    .overlay-pressable {
+        @apply fixed inset-0 h-full pointer-events-none bg-white mix-blend-screen animate-none;
+    }
+
+    .overlay-press {
+        @apply overlay-pressable opacity-20;
+    }
+
+    .overlay-hover {
+        animation: hover 0.1s !important;
+        @apply overlay-pressable opacity-10;
+    }
+
+    @keyframes hover {
+        from {
+            opacity: 0%;
+        }
+
+        to {
+            opacity: 10%;
+        }
+    }
+
+    img.fadeon,
+    video.fadeon,
+    .fadeon > img,
+    .fadeon > video {
+        animation: ease-in fadeon 0.5s;
+        opacity: 100%;
+    }
+
+    @keyframes fadeon {
+        from {
+            opacity: 0%;
+        }
+
+        to {
+            opacity: 100%;
+        }
+    }
+
+    img.fadeoff,
+    video.fadeoff,
+    .fadeoff > img,
+    .fadeoff > video {
+        animation: ease-out fadeoff 0.25s;
+        opacity: 0%;
+    }
+
+    @keyframes fadeoff {
+        from {
+            opacity: 100%;
+        }
+
+        to {
+            opacity: 0%;
+        }
+    }
+
+    .popup-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup-panel > .cn {
+        margin: var(--lg);
+        max-height: calc(100dvh - var(--lg) * 2);
+        max-width: min(calc(100vw - var(--lg) * 2), 350px);
+    }
+
+    .popup-panel > * {
+        pointer-events: auto;
+    }
+
+    .placeholder {
+        animation-name: flash;
+        animation-duration: 1.4s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        @apply bg-gray-50; 
+    }
+
+    @keyframes flash {
+        0%, 100% {
+            filter: brightness(1);
+        }
+        50% {
+            filter: brightness(.96);
+        }
+    }
+
+
+    .post {
+        --cols: 2;
+        width: calc(100% / var(--cols) - (var(--spacing-post) * 2 / var(--cols)));
+    }
+
+    @media (min-width: 768px) {
+        .post {
+            --cols: 3;
+        }
+    }
+    
+    @media (min-width: 992px) {
+        .post {
+            --cols: 4;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .post {
+            --cols: 5;
+        }
+    }
+
+    @media (min-width: 1500px) {
+        .post {
+            --cols: 6;
+        }
+    }
+
+    @media (min-width: 1700px) {
+        .post {
+            --cols: 7;
+        }
+    }
+}
